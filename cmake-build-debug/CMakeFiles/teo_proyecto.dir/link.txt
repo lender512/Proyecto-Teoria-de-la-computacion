@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/teo_proyecto.dir/main.cpp.o CMakeFiles/teo_proyecto.dir/funciones.cpp.o CMakeFiles/teo_proyecto.dir/methods.cpp.o CMakeFiles/teo_proyecto.dir/methodsP2.cpp.o  -o teo_proyecto.exe -Wl,--out-implib,libteo_proyecto.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
