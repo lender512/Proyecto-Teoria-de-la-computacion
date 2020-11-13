@@ -146,6 +146,8 @@ void leer(string ruta){
     }
     string cadena, txt;
     do{
+        test.current_state = test.initial_state;
+        tesm.current_state = tesm.initial_state;
         cout<<"Ingrese la cadena a testear: "; cin>>cadena;
         if (cadena != "e"){
             for(int i = 0; i < cadena.length(); i++){
