@@ -84,7 +84,7 @@ void make_DFA(){
     vector<int> finales;
     int estados, estado_inicial, n_estados_finales;
     srand(time(NULL));
-    estados = 4 + rand() % (11 - 4);
+    estados = 4 + rand() % (9 - 4);
     estado_inicial = 0 + rand() % (estados);
     n_estados_finales = 1 + rand() % (4 - 1);
     for(int i = 0; i < n_estados_finales; i++){
@@ -205,6 +205,72 @@ void leer2(string ruta){
 
 }
 
+void leer3(string ruta){
+    cout << "Automata Input: \n";
+    ifstream file(ruta);
+    inputDFA automata;
+    string line;
+
+    while(getline(file, line)){
+        line.erase(remove(line.begin(), line.end(), ' '), line.end());
+        if(line.length() > 3){
+            for(int i=0; i < line.length(); i++){
+                automata.estados.push_back((int)line[i]-48);
+            }
+        }
+        else{
+            for(int i=0; i < line.length(); i++){
+                automata.transiciones.push_back((int)line[i]-48);
+            }
+        }
+    }
+
+    int n_states;
+    int initial_state;
+    int n_final;
+    cout << automata.estados[0]<<" "<< automata.estados[1]<<" "<< automata.estados[2];
+    //cin >> n_states >> initial_state >> n_final;
+    DFA test = DFA(automata.estados[0],automata.estados[1],automata.estados[2], automata.estados, automata.transiciones);
+    cout << endl;
+    auto test2 = reverse(test);
+    cout << "Matriz de equivalencia: " << endl;
+    test.equivalencian2();
+
+}
+
+void leer4(string ruta){
+    cout << "Automata Input: \n";
+    ifstream file(ruta);
+    inputDFA automata;
+    string line;
+
+    while(getline(file, line)){
+        line.erase(remove(line.begin(), line.end(), ' '), line.end());
+        if(line.length() > 3){
+            for(int i=0; i < line.length(); i++){
+                automata.estados.push_back((int)line[i]-48);
+            }
+        }
+        else{
+            for(int i=0; i < line.length(); i++){
+                automata.transiciones.push_back((int)line[i]-48);
+            }
+        }
+    }
+
+    int n_states;
+    int initial_state;
+    int n_final;
+    cout << automata.estados[0]<<" "<< automata.estados[1]<<" "<< automata.estados[2];
+    //cin >> n_states >> initial_state >> n_final;
+    DFA test = DFA(automata.estados[0],automata.estados[1],automata.estados[2], automata.estados, automata.transiciones);
+    cout << endl;
+    auto test2 = reverse(test);
+    cout << "Matriz de equivalencia: " << endl;
+    test.min_hm();
+
+}
+
 void pregunta1(){
     int op2;
     do {
@@ -315,6 +381,118 @@ void pregunta2(){
     } while (op2 == 1 || op2 == 2 || op2 == 3 || op2 == 4 || op2 == 5);
 }
 
+void pregunta3(){
+    int op2;
+    do {
+        cout<<"\tMenu"<<endl;
+        cout<<"1. DFA1(Figura 4.8)"<<endl;
+        cout<<"2. DFA2(Figura 4.10)"<<endl;
+        cout<<"3. DFA3(Figura 4.14)"<<endl;
+        cout<<"4. DFA4(Figura 4.15)"<<endl;
+        cout<<"5. DFA random"<<endl;
+        cout<<"6. DFA personalizado"<<endl;
+        cout<<"7. DFA personalizado manual"<<endl;
+        cout<<"8. Regresar al menu anterior"<<endl;
+        cout<<"Ingrese opcion: "; cin>>op2;
+        switch (op2) {
+            case 1:
+                leer3("DFA1.txt");
+                break;
+
+            case 2:
+                leer3("DFAextra.txt");
+                break ;
+
+            case 3:
+                leer3("DFA2.txt");
+                break ;
+
+            case 4:
+                leer3("DFA3.txt");
+                break;
+
+            case 5:
+                make_DFA();
+                leer3("DFA_random.txt");
+                break;
+
+            case 6:
+                make_DFAP();
+                leer3("DFA_P.txt");
+                break;
+
+            case 7:
+                make_DFAP2();
+                leer3("DFA_P2.txt");
+                break;
+
+            case 8:
+                cout << "Salio del menu"<<endl;
+                break;
+
+            default:
+                cout << "Ingreso una opcion incorrecta"<<endl;
+        }
+    } while (op2 == 1 || op2 == 2 || op2 == 3 || op2 == 4 || op2 == 5);
+}
+
+void pregunta4() {
+    int op2;
+    do {
+        cout<<"\tMenu"<<endl;
+        cout<<"1. DFA1(Figura 4.8)"<<endl;
+        cout<<"2. DFA2(Figura 4.10)"<<endl;
+        cout<<"3. DFA3(Figura 4.14)"<<endl;
+        cout<<"4. DFA4(Figura 4.15)"<<endl;
+        cout<<"5. DFA random"<<endl;
+        cout<<"6. DFA personalizado"<<endl;
+        cout<<"7. DFA personalizado manual"<<endl;
+        cout<<"8. Regresar al menu anterior"<<endl;
+        cout<<"Ingrese opcion: "; cin>>op2;
+        switch (op2) {
+            case 1:
+                leer4("DFA1.txt");
+                break;
+
+            case 2:
+                leer4("DFAextra.txt");
+                break ;
+
+            case 3:
+                leer4("DFA2.txt");
+                break ;
+
+            case 4:
+                leer4("DFA3.txt");
+                break;
+
+            case 5:
+                make_DFA();
+                leer4("DFA_random.txt");
+                break;
+
+            case 6:
+                make_DFAP();
+                leer4("DFA_P.txt");
+                break;
+
+            case 7:
+                make_DFAP2();
+                leer4("DFA_P2.txt");
+                break;
+
+            case 8:
+                cout << "Salio del menu"<<endl;
+                break;
+
+            default:
+                cout << "Ingreso una opcion incorrecta"<<endl;
+        }
+    } while (op2 == 1 || op2 == 2 || op2 == 3 || op2 == 4 || op2 == 5);
+}
+void pregunta5() {
+}
+
 void menu(){
     int op;
 
@@ -322,6 +500,7 @@ void menu(){
         cout<<"\tMenu"<<endl;
         cout<<"1. Pregunta 1"<<endl;
         cout<<"2. Pregunta 2"<<endl;
+        cout<<"2. Pregunta 3"<<endl;
         cout<<"3. Salir"<<endl;
         cout<<"Ingrese opcion: "; cin>>op;
         switch (op) {
@@ -334,6 +513,18 @@ void menu(){
                 break;
 
             case 3:
+                pregunta3();
+                break;
+
+            case 4:
+                pregunta4();
+                break;
+
+            case 5:
+                pregunta5();
+                break;
+
+            case 6:
                 cout << "Salio del programa"<<endl;
                 break;
 

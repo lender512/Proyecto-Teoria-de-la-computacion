@@ -31,6 +31,13 @@ struct DFA{
   bool accepted();
   //2da pregunta
   void equivalencia();
+  //3ra pregunta
+  set<vector<int>> dependencia(int a, int b);
+  vector<vector<char>>  equivalencian2();
+  //4ta pregunta
+  set<int> reachable(int s);
+  set<int> initial_reachable();
+  void min_hm();
   //1ra pregunta
   DFA mindfa();
 

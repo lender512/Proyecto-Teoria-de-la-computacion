@@ -31,16 +31,33 @@ void DFA::equivalencia() {
   
   vector<int> diff; //Stores non final states
 
-  set_difference(states.begin(), states.end(), final_states.begin(), final_states.end(), std::inserter(diff, diff.begin()));
-  
+    for (auto s : states) {
+        bool found = false;
+        for (auto fs : final_states) {
+            if (s == fs) {
+                found = true;
+            }
+        }
+        if (!found) {
+            diff.push_back(s);
+        }
+    }
+
+    for (auto s : final_states) cout << s << " ";
+    cout << endl;
+    for (auto s : diff) cout << s << " ";
+    cout << endl;
+
   //Base case
   for (int i = 0; i < final_states.size(); i++) {
     for (int j = 0; j < diff.size(); j++) {
       int p = final_states[i];
       int q = diff[j];  
       //Set every trivial equivalence to 0
-      M[q][p] = '0';
-      M[p][q] = '0';
+      if (p != q) {
+          M[q][p] = '0';
+          M[p][q] = '0';
+      }
     }
   }
 
@@ -52,11 +69,13 @@ void DFA::equivalencia() {
     for (auto t1: transitions) {
       for (auto t2: transitions) {
         //cout << t1.destiny << " and " << t2.destiny << " compare " <<  get<0>(c) << " and " << get<1>(c) << endl;
-        if (M[t1.destiny][t2.destiny] == '0' && t1.symbol == t2.symbol) {
+        if (M[t1.destiny][t2.destiny] == '0' && t1.symbol == t2.symbol && t1.origin != t2.origin) {
           int p = t1.origin;
-          int q = t2.origin;  
-          M[p][q] = '0';
-          M[q][p] = '0';
+          int q = t2.origin;
+          if (p != q) {
+              M[p][q] = '0';
+              M[q][p] = '0';
+          }
         }
       }
     }
@@ -67,6 +86,7 @@ void DFA::equivalencia() {
       temp = M;
     }
   }
+
 
   //printing
   cout << setw(8);
